@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Beam Deflection Calculator</title>
+<title>Beam Deflection Calculator V2</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -20,13 +21,13 @@ body {
 }
 
 .container {
-    max-width: 1250px;
-    margin: 0 auto;
+    max-width: 1350px;
+    margin: auto;
     padding: 25px 18px 40px;
 }
 
 .header {
-    background: linear-gradient(135deg, #12355b, #2563eb);
+    background: linear-gradient(135deg,#12355b,#2563eb);
     color: white;
     padding: 25px;
     border-radius: 14px;
@@ -40,7 +41,7 @@ body {
 
 .header p {
     margin: 0;
-    opacity: 0.9;
+    opacity: .9;
 }
 
 .main-grid {
@@ -54,7 +55,7 @@ body {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
 }
 
 .card h2 {
@@ -87,7 +88,7 @@ input:focus,
 select:focus {
     outline: none;
     border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.12);
+    box-shadow: 0 0 0 2px rgba(37,99,235,.12);
 }
 
 .input-unit {
@@ -96,31 +97,47 @@ select:focus {
     gap: 6px;
 }
 
-.two-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.info {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 7px;
+}
+
+.hidden {
+    display: none !important;
 }
 
 button {
     width: 100%;
     border: none;
     border-radius: 8px;
-    padding: 14px;
-    margin-top: 18px;
+    padding: 13px;
+    margin-top: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
 }
 
 #calculateButton {
-    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    margin-top: 20px;
+    padding: 16px;
     color: white;
-    box-shadow: 0 4px 10px rgba(37,99,235,0.3);
+    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    box-shadow: 0 4px 10px rgba(37,99,235,.3);
 }
 
 #calculateButton:hover {
     background: linear-gradient(135deg,#1d4ed8,#1e40af);
+}
+
+.save-button {
+    background: #059669;
+    color: white;
+}
+
+.save-button:hover {
+    background: #047857;
 }
 
 .reset-button {
@@ -130,6 +147,15 @@ button {
 
 .reset-button:hover {
     background: #475569;
+}
+
+.clear-button {
+    background: #dc2626;
+    color: white;
+}
+
+.clear-button:hover {
+    background: #b91c1c;
 }
 
 .error {
@@ -144,18 +170,17 @@ button {
     font-size: 13px;
 }
 
-.info {
-    color: #64748b;
-    font-size: 12px;
-    line-height: 1.5;
-    margin-top: 7px;
+.status {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: #ecfdf5;
+    color: #166534;
+    border-radius: 6px;
+    font-size: 13px;
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* Results */
+/* RESULTS */
 
 .result-grid {
     display: grid;
@@ -182,7 +207,35 @@ button {
     font-weight: bold;
 }
 
-/* Canvas */
+/* SCALE */
+
+.scale-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.scale-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 14px;
+    border-radius: 8px;
+}
+
+.scale-label {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.scale-value {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d4ed8;
+}
+
+/* CANVAS */
 
 .canvas-wrapper {
     width: 100%;
@@ -192,35 +245,81 @@ button {
 #beamCanvas {
     display: block;
     width: 100%;
-    min-width: 650px;
-    height: 400px;
+    min-width: 700px;
+    height: 430px;
     border: 1px solid #dbe3ec;
     border-radius: 8px;
     background: white;
 }
 
-/* Diagrams */
+/* LEGEND */
 
-.diagram-container {
-    margin-top: 15px;
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
 }
 
-.diagram-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: #334155;
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
 }
 
-.diagram {
-    width: 100%;
-    height: 180px;
+.legend-color {
+    width: 22px;
+    height: 4px;
+    border-radius: 3px;
+}
+
+/* CASE LIST */
+
+.case-list {
+    margin-top: 10px;
+}
+
+.case-item {
+    display: grid;
+    grid-template-columns: 8px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 7px;
+    background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 7px;
-    background: #fff;
 }
 
-/* Section */
+.case-color {
+    width: 8px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.case-name {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.case-detail {
+    color: #64748b;
+    font-size: 11px;
+    margin-top: 3px;
+    line-height: 1.4;
+}
+
+.case-delete {
+    width: auto;
+    margin: 0;
+    padding: 7px 10px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 12px;
+}
+
+/* SECTION */
 
 .section-preview {
     margin-top: 15px;
@@ -234,7 +333,7 @@ button {
     max-width: 100%;
 }
 
-/* Formula */
+/* FORMULA */
 
 .formula {
     margin-top: 15px;
@@ -246,16 +345,23 @@ button {
     font-size: 14px;
 }
 
-/* Status */
+/* DIAGRAM */
 
-.status {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    background: #ecfdf5;
-    color: #166534;
-    font-size: 13px;
-    display: none;
+.diagram-container {
+    margin-top: 15px;
+}
+
+.diagram-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.diagram {
+    width: 100%;
+    height: 180px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
 }
 
 .footer {
@@ -274,6 +380,7 @@ button {
     .result-grid {
         grid-template-columns: repeat(2,1fr);
     }
+
 }
 
 @media(max-width:550px) {
@@ -282,14 +389,12 @@ button {
         grid-template-columns: 1fr;
     }
 
-    .two-column {
+    .scale-panel {
         grid-template-columns: 1fr;
     }
 
-    .header h1 {
-        font-size: 22px;
-    }
 }
+
 </style>
 
 </head>
@@ -298,157 +403,170 @@ button {
 
 <div class="container">
 
-<!-- HEADER -->
+<!-- =====================================================
+HEADER
+===================================================== -->
 
 <div class="header">
-    <h1>Beam Deflection Calculator</h1>
-    <p>
-        Simply Supported & Cantilever Beam Analysis
-    </p>
+
+<h1>
+Beam Deflection Calculator
+</h1>
+
+<p>
+Simply Supported & Cantilever Beam Analysis
+</p>
+
 </div>
 
 <div class="main-grid">
 
-<!-- ===================================================== -->
-
-<!-- INPUT PANEL -->
-
-<!-- ===================================================== -->
+<!-- =====================================================
+INPUT
+===================================================== -->
 
 <div>
 
+<!-- BEAM -->
+
 <div class="card">
 
-<h2>1. Beam & Load</h2>
+<h2>
+1. Beam & Load
+</h2>
 
-<label for="beamType">Beam Type</label>
+<label>
+Beam Type
+</label>
 
 <select id="beamType">
 
-```
 <option value="simply">
-    Simply Supported
+Simply Supported
 </option>
 
 <option value="cantilever">
-    Cantilever
+Cantilever
 </option>
-```
 
 </select>
 
-<label for="beamLength">
-    Beam Length
+<label>
+Beam Length
 </label>
 
 <div class="input-unit">
 
-```
 <input
-    id="beamLength"
-    type="number"
-    value="3000"
-    min="1"
-    step="any">
+id="beamLength"
+type="number"
+value="3000"
+min="1"
+step="any">
 
 <select id="lengthUnit">
-    <option value="mm">mm</option>
-    <option value="m">m</option>
+
+<option value="mm">
+mm
+</option>
+
+<option value="m">
+m
+</option>
+
 </select>
-```
 
 </div>
 
-<label for="load">
-    Point Load
+<label>
+Point Load
 </label>
 
 <div class="input-unit">
 
-```
 <input
-    id="load"
-    type="number"
-    value="10"
-    min="0.001"
-    step="any">
+id="load"
+type="number"
+value="10"
+min="0.001"
+step="any">
 
 <select id="loadUnit">
 
-    <option value="kN">kN</option>
-    <option value="N">N</option>
+<option value="kN">
+kN
+</option>
+
+<option value="N">
+N
+</option>
 
 </select>
-```
 
 </div>
 
-<label for="loadPosition">
-    Load Position from Left / Fixed End
+<label>
+Load Position
 </label>
 
 <div class="input-unit">
 
-```
 <input
-    id="loadPosition"
-    type="number"
-    value="1500"
-    min="0"
-    step="any">
+id="loadPosition"
+type="number"
+value="1500"
+min="0"
+step="any">
 
 <select>
-    <option>mm</option>
+<option>mm</option>
 </select>
-```
 
 </div>
 
 <div class="info">
 
-For Simply Supported Beam:
-load position is measured from the left support.
+Simply Supported:
+position from left support.
 
-For Cantilever Beam:
-load position is measured from the fixed end.
+<br>
+
+Cantilever:
+position from fixed end.
 
 </div>
 
 </div>
 
-<!-- ===================================================== -->
-
-<!-- CROSS SECTION -->
-
-<!-- ===================================================== -->
+<!-- SECTION -->
 
 <div class="card">
 
-<h2>2. Cross Section</h2>
+<h2>
+2. Cross Section
+</h2>
 
-<label for="sectionType">
-    Cross Section Type
+<label>
+Cross Section Type
 </label>
 
 <select id="sectionType">
 
-```
 <option value="rectangle">
-    Rectangle
+Rectangle
 </option>
 
 <option value="circle">
-    Solid Circle
+Solid Circle
 </option>
 
 <option value="iBeam">
-    I-Beam
+I-Beam
 </option>
 
 <option value="hollowRectangle">
-    Hollow Rectangle
+Hollow Rectangle
 </option>
-```
 
 </select>
 
@@ -457,26 +575,26 @@ load position is measured from the fixed end.
 <div id="rectangleInputs">
 
 <label>
-    Width b (mm)
+Width b (mm)
 </label>
 
 <input
- id="rectB"
- type="number"
- value="100"
- min="0.001"
- step="any">
+id="rectB"
+type="number"
+value="100"
+min="0.001"
+step="any">
 
 <label>
-    Height h (mm)
+Height h (mm)
 </label>
 
 <input
- id="rectH"
- type="number"
- value="200"
- min="0.001"
- step="any">
+id="rectH"
+type="number"
+value="200"
+min="0.001"
+step="any">
 
 </div>
 
@@ -485,15 +603,15 @@ load position is measured from the fixed end.
 <div id="circleInputs" class="hidden">
 
 <label>
-    Diameter d (mm)
+Diameter d (mm)
 </label>
 
 <input
- id="circleD"
- type="number"
- value="150"
- min="0.001"
- step="any">
+id="circleD"
+type="number"
+value="150"
+min="0.001"
+step="any">
 
 </div>
 
@@ -502,207 +620,238 @@ load position is measured from the fixed end.
 <div id="iBeamInputs" class="hidden">
 
 <label>
-    Total Width B (mm)
+Total Width B (mm)
 </label>
 
 <input
- id="iB"
- type="number"
- value="150"
- min="0.001"
- step="any">
+id="iB"
+type="number"
+value="150"
+min="0.001"
+step="any">
 
 <label>
-    Total Height H (mm)
+Total Height H (mm)
 </label>
 
 <input
- id="iH"
- type="number"
- value="300"
- min="0.001"
- step="any">
+id="iH"
+type="number"
+value="300"
+min="0.001"
+step="any">
 
 <label>
-    Flange Thickness tf (mm)
+Flange Thickness tf (mm)
 </label>
 
 <input
- id="iTf"
- type="number"
- value="15"
- min="0.001"
- step="any">
+id="iTf"
+type="number"
+value="15"
+min="0.001"
+step="any">
 
 <label>
-    Web Thickness tw (mm)
+Web Thickness tw (mm)
 </label>
 
 <input
- id="iTw"
- type="number"
- value="10"
- min="0.001"
- step="any">
+id="iTw"
+type="number"
+value="10"
+min="0.001"
+step="any">
 
 </div>
 
-<!-- HOLLOW RECTANGLE -->
+<!-- HOLLOW -->
 
 <div id="hollowInputs" class="hidden">
 
 <label>
-    Outer Width B (mm)
+Outer Width B (mm)
 </label>
 
 <input
- id="hB"
- type="number"
- value="150"
- min="0.001"
- step="any">
+id="hB"
+type="number"
+value="150"
+min="0.001"
+step="any">
 
 <label>
-    Outer Height H (mm)
+Outer Height H (mm)
 </label>
 
 <input
- id="hH"
- type="number"
- value="250"
- min="0.001"
- step="any">
+id="hH"
+type="number"
+value="250"
+min="0.001"
+step="any">
 
 <label>
-    Wall Thickness t (mm)
+Wall Thickness t (mm)
 </label>
 
 <input
- id="hT"
- type="number"
- value="10"
- min="0.001"
- step="any">
+id="hT"
+type="number"
+value="10"
+min="0.001"
+step="any">
 
 </div>
 
 <div class="section-preview">
 
 <canvas
- id="sectionCanvas"
- width="260"
- height="180"> </canvas>
+id="sectionCanvas"
+width="260"
+height="180"> </canvas>
 
 </div>
 
 </div>
-
-<!-- ===================================================== -->
 
 <!-- MATERIAL -->
 
-<!-- ===================================================== -->
-
 <div class="card">
 
-<h2>3. Material</h2>
+<h2>
+3. Material
+</h2>
 
-<label for="material">
-    Material
+<label>
+Material
 </label>
 
 <select id="material">
 
-```
 <option value="steel">
-    Steel
+Steel
 </option>
 
 <option value="aluminum">
-    Aluminum
+Aluminum
 </option>
 
 <option value="wood">
-    Wood
+Wood
 </option>
 
 <option value="concrete">
-    Concrete
+Concrete
 </option>
 
 <option value="custom">
-    Custom
+Custom
 </option>
-```
 
 </select>
 
 <label>
-    Elastic Modulus E (GPa)
+Elastic Modulus E (GPa)
 </label>
 
 <input
- id="elasticModulus"
- type="number"
- value="200"
- min="0.001"
- step="any">
+id="elasticModulus"
+type="number"
+value="200"
+min="0.001"
+step="any">
 
 <div class="info">
 
-Typical approximate values:
-Steel = 200 GPa,
-Aluminum = 69 GPa,
-Wood = 10 GPa,
-Concrete = 25 GPa.
+Steel = 200 GPa<br>
+Aluminum = 69 GPa<br>
+Wood = 10 GPa<br>
+Concrete = 25 GPa
 
 </div>
 
-<!-- MAIN BUTTON -->
-
 <button
- id="calculateButton"
- type="button"
- onclick="calculate()">
+id="calculateButton"
+onclick="calculate()">
 
-```
 ▶ CALCULATE / RUN
-```
 
 </button>
 
 <button
- class="reset-button"
- type="button"
- onclick="resetCalculator()">
+class="save-button"
+onclick="saveCurrentCase()">
 
-```
-RESET
-```
+💾 SAVE CURRENT CASE
 
 </button>
 
-<div id="error" class="error"></div>
+<button
+class="reset-button"
+onclick="resetCalculator()">
 
-<div id="status" class="status">
-    Calculation completed successfully.
+RESET
+
+</button>
+
+<div
+id="error"
+class="error">
+</div>
+
+<div
+id="status"
+class="status">
 </div>
 
 </div>
 
+<!-- SAVED CASES -->
+
+<div class="card">
+
+<h2>
+Saved Cases
+</h2>
+
+<div
+class="info">
+
+Saved cases can be overlaid on the beam
+visualization for comparison.
+
 </div>
 
-<!-- ===================================================== -->
+<div
+id="caseList"
+class="case-list">
 
-<!-- RESULTS -->
+</div>
 
-<!-- ===================================================== -->
+<button
+class="clear-button"
+onclick="clearAllCases()">
+
+DELETE ALL CASES
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+RESULTS
+===================================================== -->
 
 <div>
 
 <div class="card">
 
-<h2>Calculation Results</h2>
+<h2>
+Calculation Results
+</h2>
 
 <div class="result-grid">
 
@@ -713,8 +862,8 @@ Maximum Bending Moment
 </div>
 
 <div
-    id="maxMoment"
-    class="result-value">
+id="maxMoment"
+class="result-value">
 -
 </div>
 
@@ -727,8 +876,8 @@ Maximum Bending Stress
 </div>
 
 <div
-    id="maxStress"
-    class="result-value">
+id="maxStress"
+class="result-value">
 -
 </div>
 
@@ -741,8 +890,8 @@ Maximum Deflection
 </div>
 
 <div
-    id="maxDeflection"
-    class="result-value">
+id="maxDeflection"
+class="result-value">
 -
 </div>
 
@@ -751,12 +900,12 @@ Maximum Deflection
 <div class="result-box">
 
 <div class="result-title">
-Maximum Deflection Position
+Max Deflection Position
 </div>
 
 <div
-    id="deflectionPosition"
-    class="result-value">
+id="deflectionPosition"
+class="result-value">
 -
 </div>
 
@@ -769,8 +918,8 @@ Moment of Inertia I
 </div>
 
 <div
-    id="momentInertia"
-    class="result-value">
+id="momentInertia"
+class="result-value">
 -
 </div>
 
@@ -783,8 +932,42 @@ Section Modulus Z
 </div>
 
 <div
-    id="sectionModulus"
-    class="result-value">
+id="sectionModulus"
+class="result-value">
+-
+</div>
+
+</div>
+
+</div>
+
+<!-- SCALE -->
+
+<div class="scale-panel">
+
+<div class="scale-box">
+
+<div class="scale-label">
+DEFLECTION VISUALIZATION SCALE
+</div>
+
+<div
+id="scaleValue"
+class="scale-value">
+-
+</div>
+
+</div>
+
+<div class="scale-box">
+
+<div class="scale-label">
+DISPLAYED MAX DEFLECTION
+</div>
+
+<div
+id="displayedDeflection"
+class="scale-value">
 -
 </div>
 
@@ -793,46 +976,47 @@ Section Modulus Z
 </div>
 
 <div
-    id="formula"
-    class="formula">
+id="formula"
+class="formula">
 
-Enter the beam parameters and press
+Enter parameters and press
 CALCULATE / RUN.
 
 </div>
 
 </div>
 
-<!-- ===================================================== -->
-
-<!-- BEAM VISUALIZATION -->
-
-<!-- ===================================================== -->
+<!-- BEAM -->
 
 <div class="card">
 
-<h2>Beam Visualization</h2>
+<h2>
+Beam Visualization
+</h2>
 
 <div class="canvas-wrapper">
 
 <canvas
- id="beamCanvas"
- width="900"
- height="400"> </canvas>
+id="beamCanvas"
+width="1000"
+height="450"> </canvas>
 
+</div>
+
+<div
+id="legend"
+class="legend">
 </div>
 
 </div>
 
-<!-- ===================================================== -->
-
-<!-- DIAGRAMS -->
-
-<!-- ===================================================== -->
+<!-- SFD / BMD -->
 
 <div class="card">
 
-<h2>Engineering Diagrams</h2>
+<h2>
+Engineering Diagrams
+</h2>
 
 <div class="diagram-container">
 
@@ -841,10 +1025,10 @@ Shear Force Diagram (SFD)
 </div>
 
 <canvas
- id="sfdCanvas"
- class="diagram"
- width="900"
- height="180"> </canvas>
+id="sfdCanvas"
+class="diagram"
+width="1000"
+height="180"> </canvas>
 
 </div>
 
@@ -855,70 +1039,48 @@ Bending Moment Diagram (BMD)
 </div>
 
 <canvas
- id="bmdCanvas"
- class="diagram"
- width="900"
- height="180"> </canvas>
+id="bmdCanvas"
+class="diagram"
+width="1000"
+height="180"> </canvas>
 
 </div>
 
 </div>
-
-<!-- ===================================================== -->
 
 <!-- NOTES -->
 
-<!-- ===================================================== -->
-
 <div class="card">
 
-<h2>Calculation Information</h2>
+<h2>
+Calculation Information
+</h2>
 
 <div class="info">
 
 <p>
-This calculator uses linear elastic
+The calculator uses linear elastic
 Euler-Bernoulli beam theory.
 </p>
 
 <p>
-The basic bending stress relationship is:
+Bending stress:
 </p>
 
 <div class="formula">
-
-σ = M × c / I = M / Z
-
+σ = M / Z
 </div>
 
 <p>
-where:
+Deflection visualization is exaggerated
+for graphical clarity. The actual calculated
+deflection is shown separately.
 </p>
 
-<ul>
-
-<li>
-M = bending moment
-</li>
-
-<li>
-I = second moment of area
-</li>
-
-<li>
-c = distance from neutral axis
-</li>
-
-<li>
-Z = section modulus
-</li>
-
-</ul>
-
 <p>
-The calculation assumes small deflection,
-linear elastic material behavior,
-constant cross section and idealized supports.
+When multiple cases are saved, all cases
+are displayed using a common visualization
+scale.
 </p>
 
 </div>
@@ -931,25 +1093,18 @@ constant cross section and idealized supports.
 
 <div class="footer">
 
-Beam Deflection Calculator |
+Beam Deflection Calculator V2 |
 Preliminary Engineering Calculation Tool
 
 </div>
 
 </div>
 
-<!-- ===================================================== -->
-
-<!-- JAVASCRIPT -->
-
-<!-- ===================================================== -->
-
 <script>
 
-
-/* ========================================================
-   MATERIAL DATABASE
-======================================================== */
+/* =====================================================
+MATERIAL
+===================================================== */
 
 const materialData = {
 
@@ -961,18 +1116,19 @@ const materialData = {
 };
 
 
-const materialSelect =
+const material =
     document.getElementById("material");
+
 
 const elasticModulus =
     document.getElementById("elasticModulus");
 
 
-materialSelect.addEventListener(
+material.addEventListener(
     "change",
     function() {
 
-        if (this.value === "custom") {
+        if(this.value === "custom") {
 
             elasticModulus.disabled = false;
 
@@ -990,9 +1146,9 @@ materialSelect.addEventListener(
 );
 
 
-/* ========================================================
-   SECTION SELECTION
-======================================================== */
+/* =====================================================
+SECTION CHANGE
+===================================================== */
 
 document
 .getElementById("sectionType")
@@ -1005,7 +1161,9 @@ document
 function updateSectionInputs() {
 
     const type =
-        document.getElementById("sectionType").value;
+        document.getElementById(
+            "sectionType"
+        ).value;
 
 
     document
@@ -1045,9 +1203,9 @@ function updateSectionInputs() {
 }
 
 
-/* ========================================================
-   NUMBER READER
-======================================================== */
+/* =====================================================
+NUMBER
+===================================================== */
 
 function num(id) {
 
@@ -1058,16 +1216,16 @@ function num(id) {
 }
 
 
-/* ========================================================
-   ERROR
-======================================================== */
+/* =====================================================
+ERROR
+===================================================== */
 
-function showError(message) {
+function showError(msg) {
 
     const box =
         document.getElementById("error");
 
-    box.innerHTML = message;
+    box.innerHTML = msg;
 
     box.style.display = "block";
 
@@ -1083,11 +1241,14 @@ function hideError() {
 }
 
 
-function showStatus() {
+function showStatus(msg) {
 
-    document
-    .getElementById("status")
-    .style.display = "block";
+    const box =
+        document.getElementById("status");
+
+    box.innerHTML = msg;
+
+    box.style.display = "block";
 
 }
 
@@ -1101,104 +1262,88 @@ function hideStatus() {
 }
 
 
-/* ========================================================
-   VALIDATION
-======================================================== */
+/* =====================================================
+VALIDATION
+===================================================== */
 
 function validateInputs() {
 
-    const Linput = num("beamLength");
-    const Pinput = num("load");
-    const a = num("loadPosition");
+    const Linput =
+        num("beamLength");
 
-    if (!Number.isFinite(Linput) || Linput <= 0) {
+    const Pinput =
+        num("load");
 
+    const a =
+        num("loadPosition");
+
+
+    if(!Number.isFinite(Linput) || Linput <= 0)
         return "Beam length must be greater than zero.";
 
-    }
 
-
-    if (!Number.isFinite(Pinput) || Pinput <= 0) {
-
+    if(!Number.isFinite(Pinput) || Pinput <= 0)
         return "Point load must be greater than zero.";
 
-    }
 
-
-    if (!Number.isFinite(a) || a < 0) {
-
-        return "Load position must be zero or greater.";
-
-    }
+    if(!Number.isFinite(a) || a < 0)
+        return "Load position cannot be negative.";
 
 
     let L = Linput;
 
-    if (
-        document.getElementById("lengthUnit").value
-        === "m"
-    ) {
 
+    if(
+        document.getElementById(
+            "lengthUnit"
+        ).value === "m"
+    )
         L *= 1000;
 
-    }
 
-
-    if (a > L) {
-
+    if(a > L)
         return "Load position cannot be greater than beam length.";
 
-    }
+
+    const type =
+        document.getElementById(
+            "beamType"
+        ).value;
 
 
-    const beamType =
-        document.getElementById("beamType").value;
-
-
-    if (
-        beamType === "simply" &&
+    if(
+        type === "simply" &&
         (a <= 0 || a >= L)
-    ) {
-
-        return `
-        For a simply supported beam,
-        the point load must be located
-        between the two supports.
-        `;
-
-    }
+    )
+        return "For a simply supported beam, the load must be between the supports.";
 
 
     const section =
-        document.getElementById("sectionType").value;
+        document.getElementById(
+            "sectionType"
+        ).value;
 
 
-    if (section === "rectangle") {
+    if(section === "rectangle") {
 
-        if (
+        if(
             num("rectB") <= 0 ||
             num("rectH") <= 0
-        ) {
-
+        )
             return "Rectangle dimensions must be greater than zero.";
 
-        }
-
     }
 
 
-    if (section === "circle") {
+    if(section === "circle") {
 
-        if (num("circleD") <= 0) {
-
+        if(num("circleD") <= 0)
             return "Circle diameter must be greater than zero.";
 
-        }
-
     }
 
 
-    if (section === "iBeam") {
+    if(section === "iBeam") {
 
         const B = num("iB");
         const H = num("iH");
@@ -1206,72 +1351,55 @@ function validateInputs() {
         const tw = num("iTw");
 
 
-        if (
+        if(
             B <= 0 ||
             H <= 0 ||
             tf <= 0 ||
             tw <= 0
-        ) {
-
+        )
             return "All I-Beam dimensions must be greater than zero.";
 
-        }
+
+        if(2*tf >= H)
+            return "2 × flange thickness must be smaller than beam height.";
 
 
-        if (2 * tf >= H) {
-
-            return "2 × flange thickness must be smaller than total height.";
-
-        }
-
-
-        if (tw >= B) {
-
+        if(tw >= B)
             return "Web thickness must be smaller than beam width.";
-
-        }
 
     }
 
 
-    if (section === "hollowRectangle") {
+    if(section === "hollowRectangle") {
 
         const B = num("hB");
         const H = num("hH");
         const t = num("hT");
 
 
-        if (
+        if(
             B <= 0 ||
             H <= 0 ||
             t <= 0
-        ) {
-
-            return "All hollow-section dimensions must be greater than zero.";
-
-        }
+        )
+            return "All hollow section dimensions must be greater than zero.";
 
 
-        if (
+        if(
             2*t >= B ||
             2*t >= H
-        ) {
-
+        )
             return "Wall thickness is too large.";
 
-        }
-
     }
 
 
-    const E = num("elasticModulus");
+    const E =
+        num("elasticModulus");
 
 
-    if (!Number.isFinite(E) || E <= 0) {
-
+    if(!Number.isFinite(E) || E <= 0)
         return "Elastic modulus must be greater than zero.";
-
-    }
 
 
     return null;
@@ -1279,14 +1407,16 @@ function validateInputs() {
 }
 
 
-/* ========================================================
-   SECTION PROPERTIES
-======================================================== */
+/* =====================================================
+SECTION PROPERTIES
+===================================================== */
 
 function getSectionProperties() {
 
     const type =
-        document.getElementById("sectionType").value;
+        document.getElementById(
+            "sectionType"
+        ).value;
 
 
     let I = 0;
@@ -1294,19 +1424,17 @@ function getSectionProperties() {
     let description = "";
 
 
-    /* RECTANGLE */
-
-    if (type === "rectangle") {
+    if(type === "rectangle") {
 
         const b = num("rectB");
         const h = num("rectH");
 
 
         I =
-            b * Math.pow(h,3) / 12;
+            b*Math.pow(h,3)/12;
 
 
-        c = h / 2;
+        c = h/2;
 
 
         description =
@@ -1315,18 +1443,16 @@ function getSectionProperties() {
     }
 
 
-    /* CIRCLE */
-
-    else if (type === "circle") {
+    else if(type === "circle") {
 
         const d = num("circleD");
 
 
         I =
-            Math.PI * Math.pow(d,4) / 64;
+            Math.PI*Math.pow(d,4)/64;
 
 
-        c = d / 2;
+        c = d/2;
 
 
         description =
@@ -1335,9 +1461,7 @@ function getSectionProperties() {
     }
 
 
-    /* I BEAM */
-
-    else if (type === "iBeam") {
+    else if(type === "iBeam") {
 
         const B = num("iB");
         const H = num("iH");
@@ -1346,17 +1470,13 @@ function getSectionProperties() {
 
 
         I =
-            (
-                B * Math.pow(H,3) / 12
-            )
+            B*Math.pow(H,3)/12
             -
-            (
-                (B-tw) *
-                Math.pow(H-2*tf,3) / 12
-            );
+            (B-tw)*
+            Math.pow(H-2*tf,3)/12;
 
 
-        c = H / 2;
+        c = H/2;
 
 
         description =
@@ -1364,8 +1484,6 @@ function getSectionProperties() {
 
     }
 
-
-    /* HOLLOW RECTANGLE */
 
     else {
 
@@ -1375,17 +1493,13 @@ function getSectionProperties() {
 
 
         I =
-            (
-                B * Math.pow(H,3) / 12
-            )
+            B*Math.pow(H,3)/12
             -
-            (
-                (B-2*t) *
-                Math.pow(H-2*t,3) / 12
-            );
+            (B-2*t)*
+            Math.pow(H-2*t,3)/12;
 
 
-        c = H / 2;
+        c = H/2;
 
 
         description =
@@ -1394,22 +1508,28 @@ function getSectionProperties() {
     }
 
 
-    const Z = I / c;
-
-
     return {
-        I,
-        c,
-        Z,
-        description
+
+        I: I,
+        c: c,
+        Z: I/c,
+        description: description
+
     };
 
 }
 
 
-/* ========================================================
-   MAIN CALCULATION
-======================================================== */
+/* =====================================================
+CURRENT RESULT
+===================================================== */
+
+let currentResult = null;
+
+
+/* =====================================================
+CALCULATE
+===================================================== */
 
 function calculate() {
 
@@ -1417,64 +1537,59 @@ function calculate() {
     hideStatus();
 
 
-    const validation =
+    const error =
         validateInputs();
 
 
-    if (validation) {
+    if(error) {
 
-        showError(validation);
+        showError(error);
 
         return;
 
     }
 
 
-    let L = num("beamLength");
+    let L =
+        num("beamLength");
 
 
-    if (
-        document.getElementById("lengthUnit").value
-        === "m"
-    ) {
-
+    if(
+        document.getElementById(
+            "lengthUnit"
+        ).value === "m"
+    )
         L *= 1000;
 
-    }
+
+    let P =
+        num("load");
 
 
-    let P = num("load");
-
-
-    if (
-        document.getElementById("loadUnit").value
-        === "kN"
-    ) {
-
+    if(
+        document.getElementById(
+            "loadUnit"
+        ).value === "kN"
+    )
         P *= 1000;
-
-    }
 
 
     const a =
         num("loadPosition");
 
 
-    /*
-       E:
-       GPa -> N/mm²
-    */
-
     const E =
-        num("elasticModulus") * 1000;
+        num("elasticModulus")*1000;
+
+
+    const beamType =
+        document.getElementById(
+            "beamType"
+        ).value;
 
 
     const section =
         getSectionProperties();
-
-
-    const beamType =
-        document.getElementById("beamType").value;
 
 
     const data = [];
@@ -1489,18 +1604,14 @@ function calculate() {
     const divisions = 500;
 
 
-    /*
-       Calculate beam response
-    */
-
-    for (
-        let i = 0;
-        i <= divisions;
+    for(
+        let i=0;
+        i<=divisions;
         i++
     ) {
 
         const x =
-            L * i / divisions;
+            L*i/divisions;
 
 
         let M = 0;
@@ -1508,43 +1619,37 @@ function calculate() {
         let y = 0;
 
 
-        /* =================================================
-           SIMPLY SUPPORTED
-        ================================================= */
+        /* SIMPLY SUPPORTED */
 
-        if (beamType === "simply") {
+        if(beamType === "simply") {
 
-            const b = L - a;
+            const b =
+                L-a;
 
 
             const RA =
-                P * b / L;
+                P*b/L;
 
 
             const RB =
-                P * a / L;
+                P*a/L;
 
 
-            if (x <= a) {
+            if(x <= a) {
 
                 V = RA;
 
-                M = RA * x;
+                M = RA*x;
 
-
-                /*
-                   Exact point-load deflection equation
-                   x <= a
-                */
 
                 y =
-                    P * b * x /
-                    (6 * E * section.I * L)
+                    P*b*x/
+                    (6*E*section.I*L)
                     *
                     (
-                        L*L -
-                        b*b -
-                        x*x
+                        L*L
+                        - b*b
+                        - x*x
                     );
 
             }
@@ -1552,19 +1657,15 @@ function calculate() {
 
                 V = -RB;
 
+
                 M =
                     RA*x -
                     P*(x-a);
 
 
-                /*
-                   Exact point-load deflection equation
-                   x >= a
-                */
-
                 y =
-                    P * a * (L-x) /
-                    (6 * E * section.I * L)
+                    P*a*(L-x)/
+                    (6*E*section.I*L)
                     *
                     (
                         2*L*x -
@@ -1577,35 +1678,22 @@ function calculate() {
         }
 
 
-        /* =================================================
-           CANTILEVER
-        ================================================= */
+        /* CANTILEVER */
 
         else {
 
-            /*
-               Point load located at x=a
-               from fixed end.
-            */
-
-            if (x <= a) {
+            if(x <= a) {
 
                 V = P;
 
                 M =
-                    P * (a-x);
+                    P*(a-x);
 
-
-                /*
-                   Cantilever deflection
-                   before the load
-                */
 
                 y =
-                    P *
-                    Math.pow(x,2) *
-                    (3*a-x)
-                    /
+                    P*
+                    Math.pow(x,2)*
+                    (3*a-x)/
                     (6*E*section.I);
 
             }
@@ -1616,15 +1704,10 @@ function calculate() {
                 M = 0;
 
 
-                /*
-                   Deflection after load
-                */
-
                 y =
-                    P *
-                    Math.pow(a,2) *
-                    (3*x-a)
-                    /
+                    P*
+                    Math.pow(a,2)*
+                    (3*x-a)/
                     (6*E*section.I);
 
             }
@@ -1633,34 +1716,29 @@ function calculate() {
 
 
         const stress =
-            Math.abs(M) / section.Z;
+            Math.abs(M)/section.Z;
 
 
-        if (
-            Math.abs(M) >
-            Math.abs(maxMoment)
-        ) {
-
-            maxMoment =
-                Math.abs(M);
-
-        }
+        maxMoment =
+            Math.max(
+                maxMoment,
+                Math.abs(M)
+            );
 
 
-        if (stress > maxStress) {
+        maxStress =
+            Math.max(
+                maxStress,
+                stress
+            );
 
-            maxStress = stress;
 
-        }
-
-
-        if (
+        if(
             Math.abs(y) >
             Math.abs(maxDeflection)
         ) {
 
             maxDeflection = y;
-
             maxDeflectionX = x;
 
         }
@@ -1668,25 +1746,51 @@ function calculate() {
 
         data.push({
 
-            x,
-            M,
-            V,
-            y
+            x:x,
+            M:M,
+            V:V,
+            y:y
 
         });
 
     }
 
 
-    /* =================================================
+    currentResult = {
+
+        beamType,
+        L,
+        P,
+        a,
+        E,
+        section,
+        data,
+        maxMoment,
+        maxStress,
+        maxDeflection,
+        maxDeflectionX,
+
+        material:
+            document.getElementById(
+                "material"
+            ).value,
+
+        sectionType:
+            document.getElementById(
+                "sectionType"
+            ).value
+
+    };
+
+
+    /*
        RESULTS
-    ================================================= */
+    */
 
     document.getElementById(
         "maxMoment"
     ).innerText =
-        (maxMoment / 1e6)
-        .toFixed(3)
+        (maxMoment/1e6).toFixed(3)
         + " kN·m";
 
 
@@ -1708,8 +1812,7 @@ function calculate() {
     document.getElementById(
         "deflectionPosition"
     ).innerText =
-        maxDeflectionX
-        .toFixed(1)
+        maxDeflectionX.toFixed(1)
         + " mm";
 
 
@@ -1727,17 +1830,52 @@ function calculate() {
         + " mm³";
 
 
+    /*
+       Auto visualization scale
+    */
+
+    const autoScale =
+        calculateAutoScale(
+            Math.abs(maxDeflection)
+        );
+
+
+    document.getElementById(
+        "scaleValue"
+    ).innerText =
+        autoScale.toFixed(0) + " ×";
+
+
+    document.getElementById(
+        "displayedDeflection"
+    ).innerText =
+        (
+            Math.abs(maxDeflection) *
+            autoScale
+        ).toFixed(1)
+        + " px";
+
+
     document.getElementById(
         "formula"
     ).innerHTML = `
 
         <strong>Section:</strong>
         ${section.description}
+
+        <br>
+
+        <strong>Material:</strong>
+        ${capitalize(
+            document.getElementById(
+                "material"
+            ).value
+        )}
+
         <br>
 
         <strong>Elastic Modulus:</strong>
-        ${num("elasticModulus").toFixed(2)}
-        GPa
+        ${(E/1000).toFixed(2)} GPa
 
         <br><br>
 
@@ -1759,53 +1897,99 @@ function calculate() {
 
         <br>
 
-        <strong>Deflection Position:</strong>
+        <strong>Maximum Deflection Position:</strong>
         ${maxDeflectionX.toFixed(1)}
         mm
 
     `;
 
 
-    /*
-       Draw graphics
-    */
+    drawAll();
 
-    drawBeam(
-        data,
-        L,
-        a,
-        beamType,
-        P
+
+    showStatus(
+        "Calculation completed successfully."
     );
-
-
-    drawSFD(
-        data,
-        L
-    );
-
-
-    drawBMD(
-        data,
-        L
-    );
-
-
-    showStatus();
 
 }
 
 
-/* ========================================================
-   BEAM VISUALIZATION
-======================================================== */
+/* =====================================================
+AUTO SCALE
+===================================================== */
+
+function calculateAutoScale(maxDeflection) {
+
+    if(maxDeflection <= 0)
+        return 1;
+
+
+    /*
+       Target display deformation:
+       approximately 100 px
+    */
+
+    let scale =
+        100/maxDeflection;
+
+
+    /*
+       Avoid excessively large visual scale
+    */
+
+    scale =
+        Math.min(
+            scale,
+            5000
+        );
+
+
+    return scale;
+
+}
+
+
+/* =====================================================
+DRAW ALL
+===================================================== */
+
+function drawAll() {
+
+    if(!currentResult)
+        return;
+
+
+    const allCases =
+        loadCases();
+
+
+    drawBeam(
+        currentResult,
+        allCases
+    );
+
+
+    drawSFD(
+        currentResult.data,
+        currentResult.L
+    );
+
+
+    drawBMD(
+        currentResult.data,
+        currentResult.L
+    );
+
+}
+
+
+/* =====================================================
+BEAM DRAWING
+===================================================== */
 
 function drawBeam(
-    data,
-    L,
-    loadPosition,
-    beamType,
-    P
+    result,
+    cases
 ) {
 
     const canvas =
@@ -1823,69 +2007,56 @@ function drawBeam(
 
 
     ctx.clearRect(
-        0,
-        0,
-        W,
-        H
+        0,0,W,H
     );
 
 
     const left = 80;
-    const right = W - 80;
+    const right = W-70;
 
-    const beamY = 210;
+    const beamY = 220;
 
     const beamWidth =
-        right - left;
-
-
-    let maxDef =
-        0;
-
-
-    data.forEach(
-        p => {
-
-            maxDef =
-                Math.max(
-                    maxDef,
-                    Math.abs(p.y)
-                );
-
-        }
-    );
-
-
-    if (maxDef < 0.001)
-        maxDef = 1;
+        right-left;
 
 
     /*
-       Visual deformation exaggeration
+       Determine common overlay scale
     */
+
+    let maxDef = 0;
+
+
+    if(cases.length > 0) {
+
+        cases.forEach(
+            c => {
+
+                maxDef =
+                    Math.max(
+                        maxDef,
+                        Math.abs(
+                            c.maxDeflection
+                        )
+                    );
+
+            }
+        );
+
+    }
+
+
+    maxDef =
+        Math.max(
+            maxDef,
+            Math.abs(
+                result.maxDeflection
+            )
+        );
+
 
     const scale =
-        100 / maxDef;
-
-
-    /*
-       Title
-    */
-
-    ctx.fillStyle =
-        "#334155";
-
-    ctx.font =
-        "bold 16px Arial";
-
-
-    ctx.fillText(
-        beamType === "simply"
-        ? "Simply Supported Beam"
-        : "Cantilever Beam",
-        20,
-        30
-    );
+        calculateAutoScale(maxDef);
 
 
     /*
@@ -1905,58 +2076,58 @@ function drawBeam(
     );
 
     ctx.strokeStyle =
-        "#94a3b8";
+        "#cbd5e1";
 
-    ctx.lineWidth = 6;
+    ctx.lineWidth = 5;
 
     ctx.stroke();
 
 
     /*
-       Deformed beam
+       Current case
     */
 
-    ctx.beginPath();
+    drawDeflectionCurve(
+        ctx,
+        result,
+        left,
+        right,
+        beamY,
+        scale,
+        "#2563eb",
+        4
+    );
 
 
-    data.forEach(
-        (p,index) => {
+    /*
+       Saved cases
+    */
 
-            const px =
-                left +
-                (p.x/L) *
-                beamWidth;
+    cases.forEach(
+        (c,index) => {
 
-
-            const py =
-                beamY +
-                p.y * scale;
-
-
-            if (index === 0)
-                ctx.moveTo(px,py);
-            else
-                ctx.lineTo(px,py);
+            drawDeflectionCurve(
+                ctx,
+                c,
+                left,
+                right,
+                beamY,
+                scale,
+                caseColors[index],
+                2.5
+            );
 
         }
     );
 
 
-    ctx.strokeStyle =
-        "#2563eb";
-
-    ctx.lineWidth = 3;
-
-    ctx.stroke();
-
-
     /*
-       Load arrow
+       Load
     */
 
     const loadX =
         left +
-        (loadPosition/L) *
+        result.a/result.L *
         beamWidth;
 
 
@@ -1970,26 +2141,22 @@ function drawBeam(
 
     ctx.moveTo(
         loadX,
-        85
+        80
     );
 
     ctx.lineTo(
         loadX,
-        beamY - 12
+        beamY-12
     );
 
     ctx.stroke();
 
 
-    /*
-       Arrow head
-    */
-
     ctx.beginPath();
 
     ctx.moveTo(
         loadX-8,
-        beamY-25
+        beamY-27
     );
 
     ctx.lineTo(
@@ -1999,7 +2166,7 @@ function drawBeam(
 
     ctx.lineTo(
         loadX+8,
-        beamY-25
+        beamY-27
     );
 
     ctx.stroke();
@@ -2009,13 +2176,14 @@ function drawBeam(
         "#dc2626";
 
     ctx.font =
-        "bold 14px Arial";
+        "bold 13px Arial";
 
 
     ctx.fillText(
-        "P = " + formatLoad(P),
-        loadX + 10,
-        85
+        "P = " +
+        formatLoad(result.P),
+        loadX+10,
+        80
     );
 
 
@@ -2023,7 +2191,9 @@ function drawBeam(
        Supports
     */
 
-    if (beamType === "simply") {
+    if(
+        result.beamType === "simply"
+    ) {
 
         drawTriangle(
             ctx,
@@ -2038,52 +2208,8 @@ function drawBeam(
             beamY
         );
 
-
-        /*
-           Ground
-        */
-
-        ctx.strokeStyle =
-            "#475569";
-
-        ctx.lineWidth = 2;
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            left-28,
-            beamY+28
-        );
-
-        ctx.lineTo(
-            left+28,
-            beamY+28
-        );
-
-        ctx.stroke();
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            right-28,
-            beamY+28
-        );
-
-        ctx.lineTo(
-            right+28,
-            beamY+28
-        );
-
-        ctx.stroke();
-
     }
     else {
-
-        /*
-           Fixed support
-        */
 
         ctx.fillStyle =
             "#64748b";
@@ -2100,10 +2226,8 @@ function drawBeam(
         ctx.strokeStyle =
             "#475569";
 
-        ctx.lineWidth = 1.5;
 
-
-        for (
+        for(
             let y=beamY-50;
             y<beamY+55;
             y+=12
@@ -2129,41 +2253,62 @@ function drawBeam(
 
 
     /*
-       Dimension line
+       Title
     */
 
-    ctx.strokeStyle =
-        "#64748b";
+    ctx.fillStyle =
+        "#334155";
 
-    ctx.lineWidth = 1;
+    ctx.font =
+        "bold 16px Arial";
 
 
-    ctx.beginPath();
-
-    ctx.moveTo(
-        left,
-        beamY+65
+    ctx.fillText(
+        result.beamType === "simply"
+        ? "Simply Supported Beam"
+        : "Cantilever Beam",
+        20,
+        30
     );
 
-    ctx.lineTo(
-        right,
-        beamY+65
-    );
 
-    ctx.stroke();
-
+    /*
+       Scale text
+    */
 
     ctx.fillStyle =
-        "#475569";
+        "#1d4ed8";
+
+    ctx.font =
+        "bold 13px Arial";
+
+
+    ctx.fillText(
+        "Deflection Scale: " +
+        scale.toFixed(0) +
+        "×",
+        20,
+        55
+    );
+
+
+    /*
+       Dimension
+    */
+
+    ctx.fillStyle =
+        "#64748b";
 
     ctx.font =
         "13px Arial";
 
 
     ctx.fillText(
-        "L = " + L.toFixed(0) + " mm",
-        W/2-45,
-        beamY+85
+        "L = " +
+        result.L.toFixed(0) +
+        " mm",
+        W/2-40,
+        beamY+75
     );
 
 
@@ -2171,31 +2316,133 @@ function drawBeam(
        Legend
     */
 
-    ctx.fillStyle =
-        "#94a3b8";
-
-    ctx.fillText(
-        "Gray = Original Beam",
-        20,
-        H-45
-    );
-
-
-    ctx.fillStyle =
-        "#2563eb";
-
-    ctx.fillText(
-        "Blue = Deflected Shape (exaggerated)",
-        20,
-        H-25
+    updateLegend(
+        result,
+        cases
     );
 
 }
 
 
-/* ========================================================
-   SUPPORT TRIANGLE
-======================================================== */
+/* =====================================================
+DEFLECTION CURVE
+===================================================== */
+
+function drawDeflectionCurve(
+    ctx,
+    result,
+    left,
+    right,
+    beamY,
+    scale,
+    color,
+    lineWidth
+) {
+
+    const width =
+        right-left;
+
+
+    ctx.beginPath();
+
+
+    result.data.forEach(
+        (p,index) => {
+
+            const x =
+                left +
+                p.x/result.L *
+                width;
+
+
+            const y =
+                beamY +
+                p.y*scale;
+
+
+            if(index === 0)
+                ctx.moveTo(x,y);
+            else
+                ctx.lineTo(x,y);
+
+        }
+    );
+
+
+    ctx.strokeStyle =
+        color;
+
+    ctx.lineWidth =
+        lineWidth;
+
+    ctx.stroke();
+
+}
+
+
+/* =====================================================
+LEGEND
+===================================================== */
+
+function updateLegend(
+    current,
+    cases
+) {
+
+    const legend =
+        document.getElementById(
+            "legend"
+        );
+
+
+    let html = `
+
+        <div class="legend-item">
+
+            <div
+                class="legend-color"
+                style="background:#2563eb">
+            </div>
+
+            Current Case
+
+        </div>
+
+    `;
+
+
+    cases.forEach(
+        (c,index) => {
+
+            html += `
+
+                <div class="legend-item">
+
+                    <div
+                        class="legend-color"
+                        style="
+                        background:${caseColors[index]}
+                        ">
+                    </div>
+
+                    Case ${index+1}
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    legend.innerHTML = html;
+
+}
+
+
+/* =====================================================
+SUPPORT TRIANGLE
+===================================================== */
 
 function drawTriangle(
     ctx,
@@ -2231,23 +2478,30 @@ function drawTriangle(
 }
 
 
-/* ========================================================
-   LOAD FORMAT
-======================================================== */
+/* =====================================================
+FORMAT LOAD
+===================================================== */
 
 function formatLoad(P) {
 
-    if (P >= 1000)
-        return (P/1000).toFixed(2) + " kN";
+    if(P >= 1000)
+        return (
+            P/1000
+        ).toFixed(2)
+        + " kN";
 
-    return P.toFixed(0) + " N";
+
+    return (
+        P
+    ).toFixed(0)
+    + " N";
 
 }
 
 
-/* ========================================================
-   SFD
-======================================================== */
+/* =====================================================
+SFD
+===================================================== */
 
 function drawSFD(
     data,
@@ -2264,8 +2518,11 @@ function drawSFD(
         canvas.getContext("2d");
 
 
-    const W = canvas.width;
-    const H = canvas.height;
+    const W =
+        canvas.width;
+
+    const H =
+        canvas.height;
 
 
     ctx.clearRect(
@@ -2275,7 +2532,6 @@ function drawSFD(
 
     const left = 55;
     const right = W-25;
-
     const mid = H/2;
 
 
@@ -2299,14 +2555,8 @@ function drawSFD(
         maxV = 1;
 
 
-    /*
-       zero line
-    */
-
     ctx.strokeStyle =
         "#94a3b8";
-
-    ctx.lineWidth = 1;
 
 
     ctx.beginPath();
@@ -2324,10 +2574,6 @@ function drawSFD(
     ctx.stroke();
 
 
-    /*
-       SFD curve
-    */
-
     ctx.beginPath();
 
 
@@ -2336,13 +2582,13 @@ function drawSFD(
 
             const x =
                 left +
-                (p.x/L) *
+                p.x/L *
                 (right-left);
 
 
             const y =
                 mid -
-                (p.V/maxV) *
+                p.V/maxV *
                 65;
 
 
@@ -2362,10 +2608,6 @@ function drawSFD(
 
     ctx.stroke();
 
-
-    /*
-       labels
-    */
 
     ctx.fillStyle =
         "#334155";
@@ -2397,9 +2639,9 @@ function drawSFD(
 }
 
 
-/* ========================================================
-   BMD
-======================================================== */
+/* =====================================================
+BMD
+===================================================== */
 
 function drawBMD(
     data,
@@ -2416,8 +2658,11 @@ function drawBMD(
         canvas.getContext("2d");
 
 
-    const W = canvas.width;
-    const H = canvas.height;
+    const W =
+        canvas.width;
+
+    const H =
+        canvas.height;
 
 
     ctx.clearRect(
@@ -2452,14 +2697,8 @@ function drawBMD(
         maxM = 1;
 
 
-    /*
-       Zero line
-    */
-
     ctx.strokeStyle =
         "#94a3b8";
-
-    ctx.lineWidth = 1;
 
 
     ctx.beginPath();
@@ -2477,10 +2716,6 @@ function drawBMD(
     ctx.stroke();
 
 
-    /*
-       BMD
-    */
-
     ctx.beginPath();
 
 
@@ -2489,13 +2724,13 @@ function drawBMD(
 
             const x =
                 left +
-                (p.x/L) *
+                p.x/L *
                 (right-left);
 
 
             const y =
                 zeroY -
-                (Math.abs(p.M)/maxM) *
+                Math.abs(p.M)/maxM *
                 120;
 
 
@@ -2522,14 +2757,10 @@ function drawBMD(
 
 
     ctx.fillStyle =
-        "rgba(37,99,235,0.18)";
+        "rgba(37,99,235,.18)";
 
     ctx.fill();
 
-
-    /*
-       BMD line
-    */
 
     ctx.beginPath();
 
@@ -2539,13 +2770,13 @@ function drawBMD(
 
             const x =
                 left +
-                (p.x/L) *
+                p.x/L *
                 (right-left);
 
 
             const y =
                 zeroY -
-                (Math.abs(p.M)/maxM) *
+                Math.abs(p.M)/maxM *
                 120;
 
 
@@ -2589,261 +2820,342 @@ function drawBMD(
 }
 
 
-/* ========================================================
-   SECTION DRAWING
-======================================================== */
+/* =====================================================
+CASE COLORS
+===================================================== */
 
-function drawSection() {
+const caseColors = [
 
-    const canvas =
-        document.getElementById(
-            "sectionCanvas"
+    "#ef4444",
+    "#16a34a",
+    "#9333ea",
+    "#f59e0b",
+    "#0891b2",
+    "#db2777",
+    "#65a30d",
+    "#7c3aed",
+    "#ea580c",
+    "#0f766e"
+
+];
+
+
+/* =====================================================
+SAVE CASE
+===================================================== */
+
+function saveCurrentCase() {
+
+    if(!currentResult) {
+
+        showError(
+            "Please calculate the beam first."
         );
 
+        return;
 
-    const ctx =
-        canvas.getContext("2d");
+    }
 
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+    let cases =
+        loadCases();
+
+
+    if(cases.length >= 10) {
+
+        showError(
+            "Maximum 10 cases can be saved."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Do not store unnecessary canvas
+       or DOM information.
+    */
+
+    const saved = {
+
+        id:
+            Date.now(),
+
+        beamType:
+            currentResult.beamType,
+
+        L:
+            currentResult.L,
+
+        P:
+            currentResult.P,
+
+        a:
+            currentResult.a,
+
+        E:
+            currentResult.E,
+
+        material:
+            currentResult.material,
+
+        sectionType:
+            currentResult.sectionType,
+
+        section:
+            currentResult.section,
+
+        data:
+            currentResult.data,
+
+        maxMoment:
+            currentResult.maxMoment,
+
+        maxStress:
+            currentResult.maxStress,
+
+        maxDeflection:
+            currentResult.maxDeflection,
+
+        maxDeflectionX:
+            currentResult.maxDeflectionX
+
+    };
+
+
+    cases.push(saved);
+
+
+    localStorage.setItem(
+        "beamDeflectionCases",
+        JSON.stringify(cases)
     );
 
 
-    const type =
-        document.getElementById(
-            "sectionType"
-        ).value;
+    updateCaseList();
 
 
-    ctx.fillStyle =
-        "#2563eb";
-
-    ctx.strokeStyle =
-        "#12355b";
-
-    ctx.lineWidth = 2;
+    drawAll();
 
 
-    const cx = 130;
-    const cy = 90;
+    showStatus(
+        "Current calculation has been saved as Case "
+        + cases.length
+        + "."
+    );
+
+}
 
 
-    /*
-       Rectangle
-    */
+/* =====================================================
+LOAD CASES
+===================================================== */
 
-    if(type === "rectangle") {
+function loadCases() {
 
-        const b = num("rectB");
-        const h = num("rectH");
+    try {
 
-
-        const scale =
-            Math.min(
-                180/b,
-                130/h
+        const data =
+            localStorage.getItem(
+                "beamDeflectionCases"
             );
 
 
-        const w = b*scale;
-        const hh = h*scale;
+        if(!data)
+            return [];
 
 
-        ctx.fillRect(
-            cx-w/2,
-            cy-hh/2,
-            w,
-            hh
-        );
-
-
-        ctx.strokeRect(
-            cx-w/2,
-            cy-hh/2,
-            w,
-            hh
-        );
+        return JSON.parse(data);
 
     }
+    catch(e) {
 
-
-    /*
-       Circle
-    */
-
-    else if(type === "circle") {
-
-        const d = num("circleD");
-
-
-        const r =
-            Math.min(
-                75,
-                d/2
-            );
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            cx,
-            cy,
-            r,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-        ctx.stroke();
-
-    }
-
-
-    /*
-       I Beam
-    */
-
-    else if(type === "iBeam") {
-
-        const B = num("iB");
-        const H = num("iH");
-        const tf = num("iTf");
-        const tw = num("iTw");
-
-
-        const scale =
-            Math.min(
-                180/B,
-                140/H
-            );
-
-
-        const w = B*scale;
-        const h = H*scale;
-        const ft = tf*scale;
-        const wt = tw*scale;
-
-
-        ctx.fillRect(
-            cx-w/2,
-            cy-h/2,
-            w,
-            ft
-        );
-
-
-        ctx.fillRect(
-            cx-wt/2,
-            cy-h/2+ft,
-            wt,
-            h-2*ft
-        );
-
-
-        ctx.fillRect(
-            cx-w/2,
-            cy+h/2-ft,
-            w,
-            ft
-        );
-
-
-        ctx.strokeRect(
-            cx-w/2,
-            cy-h/2,
-            w,
-            ft
-        );
-
-
-        ctx.strokeRect(
-            cx-wt/2,
-            cy-h/2+ft,
-            wt,
-            h-2*ft
-        );
-
-
-        ctx.strokeRect(
-            cx-w/2,
-            cy+h/2-ft,
-            w,
-            ft
-        );
-
-    }
-
-
-    /*
-       Hollow Rectangle
-    */
-
-    else {
-
-        const B = num("hB");
-        const H = num("hH");
-        const t = num("hT");
-
-
-        const scale =
-            Math.min(
-                180/B,
-                140/H
-            );
-
-
-        const w = B*scale;
-        const h = H*scale;
-        const tt = t*scale;
-
-
-        ctx.fillRect(
-            cx-w/2,
-            cy-h/2,
-            w,
-            h
-        );
-
-
-        ctx.clearRect(
-            cx-w/2+tt,
-            cy-h/2+tt,
-            w-2*tt,
-            h-2*tt
-        );
-
-
-        ctx.strokeRect(
-            cx-w/2,
-            cy-h/2,
-            w,
-            h
-        );
-
-
-        ctx.strokeStyle =
-            "#94a3b8";
-
-        ctx.strokeRect(
-            cx-w/2+tt,
-            cy-h/2+tt,
-            w-2*tt,
-            h-2*tt
-        );
+        return [];
 
     }
 
 }
 
 
-/* ========================================================
-   RESET
-======================================================== */
+/* =====================================================
+CASE LIST
+===================================================== */
+
+function updateCaseList() {
+
+    const cases =
+        loadCases();
+
+
+    const container =
+        document.getElementById(
+            "caseList"
+        );
+
+
+    if(cases.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="info">
+                No saved cases.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    cases.forEach(
+        (c,index) => {
+
+            html += `
+
+                <div class="case-item">
+
+                    <div
+                        class="case-color"
+                        style="
+                        background:${caseColors[index]}
+                        ">
+                    </div>
+
+
+                    <div>
+
+                        <div class="case-name">
+
+                            Case ${index+1}
+
+                        </div>
+
+
+                        <div class="case-detail">
+
+                            ${
+                                c.beamType === "simply"
+                                ? "Simply Supported"
+                                : "Cantilever"
+                            }
+
+                            |
+                            L =
+                            ${c.L.toFixed(0)}
+                            mm
+
+                            |
+                            P =
+                            ${formatLoad(c.P)}
+
+                            |
+                            a =
+                            ${c.a.toFixed(0)}
+                            mm
+
+                            <br>
+
+                            ${c.section.description}
+
+                            |
+                            Max δ =
+                            ${Math.abs(
+                                c.maxDeflection
+                            ).toFixed(3)}
+                            mm
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="case-delete"
+                        onclick="
+                        deleteCase(${c.id})
+                        ">
+
+                        Delete
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+DELETE CASE
+===================================================== */
+
+function deleteCase(id) {
+
+    let cases =
+        loadCases();
+
+
+    cases =
+        cases.filter(
+            c => c.id !== id
+        );
+
+
+    localStorage.setItem(
+        "beamDeflectionCases",
+        JSON.stringify(cases)
+    );
+
+
+    updateCaseList();
+
+
+    drawAll();
+
+}
+
+
+/* =====================================================
+DELETE ALL
+===================================================== */
+
+function clearAllCases() {
+
+    if(!confirm(
+        "Delete all saved cases?"
+    ))
+        return;
+
+
+    localStorage.removeItem(
+        "beamDeflectionCases"
+    );
+
+
+    updateCaseList();
+
+
+    drawAll();
+
+}
+
+
+/* =====================================================
+RESET
+===================================================== */
 
 function resetCalculator() {
 
@@ -2910,6 +3222,9 @@ function resetCalculator() {
     updateSectionInputs();
 
 
+    currentResult = null;
+
+
     hideError();
     hideStatus();
 
@@ -2945,9 +3260,19 @@ function resetCalculator() {
 
 
     document.getElementById(
+        "scaleValue"
+    ).innerText = "-";
+
+
+    document.getElementById(
+        "displayedDeflection"
+    ).innerText = "-";
+
+
+    document.getElementById(
         "formula"
-    ).innerHTML =
-        "Enter the beam parameters and press CALCULATE / RUN.";
+    ).innerText =
+        "Enter parameters and press CALCULATE / RUN.";
 
 
     clearCanvas("beamCanvas");
@@ -2957,13 +3282,19 @@ function resetCalculator() {
 }
 
 
+/* =====================================================
+CLEAR CANVAS
+===================================================== */
+
 function clearCanvas(id) {
 
     const canvas =
         document.getElementById(id);
 
+
     const ctx =
         canvas.getContext("2d");
+
 
     ctx.clearRect(
         0,
@@ -2975,13 +3306,27 @@ function clearCanvas(id) {
 }
 
 
-/* ========================================================
-   INITIALIZE
-======================================================== */
+/* =====================================================
+CAPITALIZE
+===================================================== */
+
+function capitalize(str) {
+
+    return str.charAt(0).toUpperCase()
+        + str.slice(1);
+
+}
+
+
+/* =====================================================
+INITIALIZATION
+===================================================== */
 
 elasticModulus.disabled = true;
 
-drawSection();
+updateSectionInputs();
+
+updateCaseList();
 
 </script>
 
